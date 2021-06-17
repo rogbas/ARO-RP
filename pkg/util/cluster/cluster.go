@@ -175,8 +175,6 @@ func (c *Cluster) Create(ctx context.Context, vnetResourceGroup, clusterName str
 		if err != nil {
 			return err
 		}
-
-		visibility = api.VisibilityPrivate
 	}
 
 	b, err := deploy.Asset(generator.FileClusterPredeploy)
@@ -272,12 +270,6 @@ func (c *Cluster) Create(ctx context.Context, vnetResourceGroup, clusterName str
 	if c.ci {
 		c.log.Info("fixing up NSGs")
 		err = c.fixupNSGs(ctx, vnetResourceGroup, clusterName)
-		if err != nil {
-			return err
-		}
-
-		c.log.Info("peering subnets to CI infra")
-		err = c.peerSubnetsToCI(ctx, vnetResourceGroup, clusterName)
 		if err != nil {
 			return err
 		}
