@@ -62,7 +62,7 @@ type Stenographer interface {
 }
 
 func New(color bool, enableFlakes bool, writer io.Writer) Stenographer {
-	denoter := "•"
+	denoter := "+"
 	if runtime.GOOS == "windows" {
 		denoter = "+"
 	}
